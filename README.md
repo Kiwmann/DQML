@@ -5,4 +5,8 @@ Codes and Data from the paper
 https://doi.org/10.48550/arXiv.2408.16327
 
 Run Demo.ipynb for DQML simulation.
-Data.zip consists of data in the paper.
+DatafromPaper.zip consists of the data in the paper.
+
+Kiwmann Hwang
+kiwmann.hwang@gmail.com
+
