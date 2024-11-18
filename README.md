@@ -8,7 +8,8 @@ Run Demo.ipynb for DQML simulation.
 
 DatafromPaper.zip consists of the data in the paper.
 
-
+//
+//
 
 Kiwmann Hwang
 
