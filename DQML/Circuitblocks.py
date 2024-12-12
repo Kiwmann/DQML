@@ -1,5 +1,6 @@
 import pennylane as qml
 from pennylane import numpy as np
+import qutip
 
 # Ising Block used in Embedding and Convolutional layer
 # Hadamard and RZ in each qubit and ZZ with neighboring qubit
@@ -90,3 +91,8 @@ def RandParam(num_para):
     for i in range(num_para):
         P.append(2*np.pi*np.random.rand())
     return np.array(P)
+
+def Haar_gate(w):
+    Haar_Unitary = np.array(qutip.random_objects.rand_unitary_haar(2**len(w)))
+    qml.QubitUnitary(Haar_Unitary,wires=w)
+    

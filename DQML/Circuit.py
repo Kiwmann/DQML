@@ -1,4 +1,4 @@
-from .Circuitblocks import Ising,Convolution,Pooling,Convolution_Pooling_CC,Convolution_Pooling_NC,Convolution_Pooling_Full,RandParam
+from .Circuitblocks import Ising,Convolution,Pooling,Convolution_Pooling_CC,Convolution_Pooling_NC,Convolution_Pooling_Full,RandParam,Haar_gate
 import pennylane as qml
 from pennylane import numpy as np
 
@@ -42,3 +42,33 @@ def circuit_8(scheme,depth,weights,data_in):
         return qml.probs(wires=[7])
     elif scheme == 'QCDQML':
         return qml.probs(wires=[3,7])
+    
+dev4=qml.device('default.qubit',wires=4)
+@qml.qnode(dev4)
+def circuit_22_Haar(scheme,depth,weights):
+    Haar_gate([0,1])
+    Haar_gate([2,3])
+    if scheme=='NCDQML4':
+        Convolution_Pooling_NC(weights,[0,1],[2,3],depth)
+    if scheme=='CCDQML4':
+        Convolution_Pooling_CC(weights,[0,1],[2,3],depth)
+    if scheme=='QCDQML4':
+        Convolution_Pooling_Full(weights,[0,1,2,3],depth)
+
+    return qml.probs(wires=[1,3])
+
+dev5=qml.device('default.qubit',wires=8)
+@qml.qnode(dev5)
+def circuit_44_Haar(scheme,depth,weights):
+    Haar_gate([0,1,2,3])
+    Haar_gate([4,5,6,7])
+    if scheme=='NCDQML8':
+        Convolution_Pooling_NC(weights[:(depth+2)*8],[0,1,2,3],[4,5,6,7],depth)
+        Convolution_Pooling_NC(weights[(depth+2)*8:],[1,3],[5,7],depth)
+    if scheme=='CCDQML8':
+        Convolution_Pooling_CC(weights[:(depth+2)*8],[0,1,2,3],[4,5,6,7],depth)
+        Convolution_Pooling_CC(weights[(depth+2)*8:],[1,3],[5,7],depth)
+    if scheme=='QCDQML8':
+        Convolution_Pooling_Full(weights[:(depth+2)*8],[0,1,2,3,4,5,6,7],depth)
+        Convolution_Pooling_Full(weights[(depth+2)*8:],[1,3,5,7],depth)
+    return qml.probs(wires=[3,7])
