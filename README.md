@@ -1,8 +1,7 @@
 # DQML
 ### Distributed quantum machine learning
 
-### The data and the code from the paper 
-### https://doi.org/10.48550/arXiv.2408.16327
+### The data and the code from DOI: 10.1088/2058-9565/ad9cb9 
 
 Run Demo.ipynb for DQML simulation and Effective dimension estimation.
 
